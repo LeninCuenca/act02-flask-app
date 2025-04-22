@@ -18,6 +18,9 @@ def home():
     lineas = response.text.strip().split('\n')
     encabezados = lineas[0].split('|')
     personas = [line.split('|') for line in lineas[1:] if line[0] in {'3', '4', '5', '7'}]
+    #la linea de personas lo que se encarga es de recorre todas las lineas menos la primera y y las separa por el delimitador
+    # en la parte de line[0] in {'3', '4', '5', '7' lo que hace es ver el primer caracter y verificando si el el primer caracter es 3,4,5,7 
+
 
     # Construir tabla HTML
     tabla = "<table border='1'><thead><tr>"
@@ -27,6 +30,12 @@ def home():
     for persona in personas:
         tabla += "<tr>" + ''.join(f"<td>{campo}</td>" for campo in persona) + "</tr>"
     tabla += "</tbody></table>"
+    
+    #tabla lo que hace es inicia una tabla en html con lo que pone un borde invisible y se habre al fila del encabezado
+    #con el el for h in encabezados agrega los ecabeza como columnas va agregando cada uno como una celda de encabezado <th>
+    #con tabla += "</tr></thead><tbody>" Cierra la fila <tr> y la sección de encabezado <thead>.
+    #el for persona in personas va agregando los datos de la persona de la lista y cada persona crea una fila
+    #tabla += "</tbody></table>" Se cierra la sección del cuerpo de la tabla y la etiqueta </table> completa la estructura.
 
     actual = datetime.now()
     fecha_formateada = actual.strftime("%d, %B, %Y, %M, %H, %S")
